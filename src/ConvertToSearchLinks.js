@@ -1,16 +1,23 @@
-/*
+/**
  * This function replaces the "original expression" of each rule by a link
  * to search for ocurrences of that expression on wiki pages
+ * @author: [[User:Helder.wiki]]
+ * @tracking: [[Special:GlobalUsage/User:Helder.wiki/Tools/ConvertToSearchLinks.js]] ([[File:User:Helder.wiki/Tools/ConvertToSearchLinks.js]])
  */
-var convertToSearchLinks = function (){
+/*jslint browser: true, white: true, regexp: true*/
+/*global jQuery, mediaWiki */
+( function ( $, mw /* , undefined */ ) {
+'use strict';
+
+function convertToSearchLinks (){
 	var	$list = $('#bodyContent').find('li'),
 		ruleSyntax = /^\s*(\S[^:]*?)\s*:\s*([\S].*?)\s*(?:\/\/.*?)?$/;
 
 	$list.each(function(){
-		var $item = $(this),
-			searchURL = mw.util.wikiGetlink( 'Special:Search' ) + '?fulltext=1&search="';
+		var	$item = $(this),
+			searchURL = mw.util.wikiGetlink( 'Special:Search' ) + '?fulltext=1&search="',
+			match = ruleSyntax.exec( $item.text() );
 		// Current syntax: * old word : new word //Some optional comment
-		var match = ruleSyntax.exec( $item.text() );
 		if( match && match[1] && match[2]) {
 			$item.html( function( index, oldhtml ){
 				var link = mw.html.element(
@@ -47,3 +54,5 @@ if ( $.inArray( mw.config.get('wgPageName'),
 		convertToSearchLinks();
 	});
 }
+
+}( jQuery, mediaWiki ) );
