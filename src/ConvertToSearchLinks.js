@@ -9,8 +9,8 @@
 ( function ( $, mw /* , undefined */ ) {
 'use strict';
 
-function convertToSearchLinks (){
-	var	$list = $('#bodyContent').find('li'),
+var convertToSearchLinks = function (){
+	var $list = $('#bodyContent').find('li'),
 		ruleSyntax = /^\s*(\S[^:]*?)\s*:\s*([\S].*?)\s*(?:\/\/.*?)?$/;
 
 	$list.each(function(){
@@ -19,6 +19,7 @@ function convertToSearchLinks (){
 			match = ruleSyntax.exec( $item.text() );
 		// Current syntax: * old word : new word //Some optional comment
 		if( match && match[1] && match[2]) {
+			/*jslint unparam:true*/
 			$item.html( function( index, oldhtml ){
 				var link = mw.html.element(
 						'a', {
@@ -29,6 +30,7 @@ function convertToSearchLinks (){
 					newRule = link + ': ' + match[2] + ' ' + match[3];
 				return oldhtml.replace( ruleSyntax,	newRule);
 			});
+			/*jslint unparam:false */
 		}
 	});
 };
@@ -46,10 +48,9 @@ if ( $.inArray( mw.config.get('wgPageName'),
 	mw.loader.load(
 		'//pt.wikibooks.org/w/index.php?title=User:Helder.wiki/Tools/LanguageConverter.js/LevenshteinDistance.js&action=raw&ctype=text/javascript&smaxage=21600&maxage=86400'
 	);
-	var portletLink = mw.util.addPortletLink( 'p-cactions', '#', 'Convert to search links',
+	$(mw.util.addPortletLink( 'p-cactions', '#', 'Convert to search links',
 		'ca-convert-to-search', 'Replace the left hand side of each convertion rule by a link to the search page'
-	);
-	$(portletLink).click( function( e ) {
+	)).click( function( e ) {
 		e.preventDefault();
 		convertToSearchLinks();
 	});
