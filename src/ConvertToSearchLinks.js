@@ -15,7 +15,7 @@ var convertToSearchLinks = function (){
 
 	$list.each(function(){
 		var	$item = $(this),
-			searchURL = mw.util.wikiGetlink( 'Special:Search' ) + '?fulltext=1&search="',
+			searchURL = mw.util.wikiGetlink( 'Special:Search', { fulltext: 1, search: '"' } ),
 			match = ruleSyntax.exec( $item.text() );
 		// Current syntax: * old word : new word //Some optional comment
 		if( match && match[1] && match[2]) {
