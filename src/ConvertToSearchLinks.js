@@ -46,7 +46,7 @@ if ( $.inArray( mw.config.get('wgPageName'),
 		'Wikisource:Modernização/Dicionário/pt-PT'
 	] ) !== -1 ) {
 	mw.loader.load(
-		'//pt.wikibooks.org/w/index.php?title=User:Helder.wiki/Tools/LanguageConverter.js/LevenshteinDistance.js&action=raw&ctype=text/javascript&smaxage=21600&maxage=86400'
+		'//pt.wikibooks.org/w/index.php?title=User:Helder.wiki/Tools/LanguageConverter.js/LevenshteinDistance.js&action=raw&ctype=text/javascript'
 	);
 	$(mw.util.addPortletLink( 'p-cactions', '#', 'Convert to search links',
 		'ca-convert-to-search', 'Replace the left hand side of each convertion rule by a link to the search page'
