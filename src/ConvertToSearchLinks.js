@@ -4,8 +4,6 @@
  * @author: Helder (https://github.com/he7d3r)
  * @license: CC BY-SA 3.0 <https://creativecommons.org/licenses/by-sa/3.0/>
  */
-/*jslint browser: true, white: true, regexp: true*/
-/*global jQuery, mediaWiki */
 ( function ( $, mw /* , undefined */ ) {
 'use strict';
 
@@ -19,7 +17,7 @@ var convertToSearchLinks = function (){
 			match = ruleSyntax.exec( $item.text() );
 		// Current syntax: * old word : new word //Some optional comment
 		if( match && match[1] && match[2]) {
-			/*jslint unparam:true*/
+			/*jshint unused:false */
 			$item.html( function( index, oldhtml ){
 				var link = mw.html.element(
 						'a', {
@@ -30,7 +28,7 @@ var convertToSearchLinks = function (){
 					newRule = link + ': ' + match[2] + ' ' + match[3];
 				return oldhtml.replace( ruleSyntax,	newRule);
 			});
-			/*jslint unparam:false */
+			/*jshint unused:true */
 		}
 	});
 };
